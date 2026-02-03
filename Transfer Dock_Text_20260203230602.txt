@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Harshit ❤️ Aditi</title>
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(135deg, #ffd1dc, #ffeaea);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Comic Sans MS', cursive;
+    transition: background 1s ease;
+  }
+
+  .card {
+    position: relative;
+    background: white;
+    padding: 30px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.25);
+    max-width: 360px;
+    width: 90%;
+    z-index: 2;
+  }
+
+  img { width: 100%; border-radius: 20px; margin-bottom: 15px; }
+  h1 { color: #ff3366; }
+
+  button {
+    margin: 10px;
+    padding: 12px 25px;
+    font-size: 1.1em;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+  }
+
+  .yes { background: #ff3366; color: white; }
+  .no { background: #999; color: white; position: relative; transition: transform 0.2s; }
+
+  .heart {
+    position: fixed;
+    top: -10px;
+    color: #ff4d6d;
+    font-size: 20px;
+    animation: fall linear forwards;
+    z-index: 1;
+  }
+
+  @keyframes fall {
+    to { transform: translateY(110vh); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<audio id="loveSong" loop>
+  <source src="tutumeri.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" onclick="playMusic()" 
+style="position:fixed; top:15px; right:15px; padding:10px 18px; border:none; border-radius:25px; background:#ff3366; color:white; font-size:14px; cursor:pointer; z-index:999;">
+🎵 Tap for Music
+</button>
+
+<div class="card">
+  <img src="photo.jpg" alt="Harshit and Aditi">
+  <h1>💖 Harshit & Aditi 💖</h1>
+  <p>Tu tu meri,<br>main tera hone laga… 🥹</p>
+  <p><strong>Will you be my Valentine?</strong></p>
+
+  <button class="yes" onclick="showLove()">YES 💘</button>
+  <button class="no" onmouseover="moveNo()" onclick="noClicked()">NO 😈</button>
+</div>
+
+<script>
+function playMusic() {
+  const song = document.getElementById("loveSong");
+  song.play().then(() => {
+    document.getElementById("musicBtn").style.display = "none";
+  }).catch(() => {
+    alert("Tap again to start music 💖");
+  });
+}
+
+function showLove() {
+  alert("YAYYYY 💖 Aditi loves Harshit forever 🥹💘");
+  document.body.style.background = "linear-gradient(135deg, #ff9a9e, #fad0c4)";
+
+  for (let i = 0; i < 40; i++) {
+    const heart = document.createElement("div");
+    heart.innerHTML = "💖";
+    heart.style.position = "fixed";
+    heart.style.left = "50%";
+    heart.style.top = "50%";
+    heart.style.fontSize = "24px";
+    heart.style.zIndex = "999";
+    const angle = Math.random() * 2 * Math.PI;
+    const distance = Math.random() * 300;
+    heart.style.transition = "transform 1s ease-out, opacity 1s";
+    document.body.appendChild(heart);
+    setTimeout(() => {
+      heart.style.transform = `translate(${Math.cos(angle)*distance}px, ${Math.sin(angle)*distance}px)`;
+      heart.style.opacity = "0";
+    }, 10);
+    setTimeout(() => heart.remove(), 1000);
+  }
+}
+
+function moveNo() {
+  const btn = document.querySelector('.no');
+  const x = Math.random() * 120 - 60;
+  const y = Math.random() * 120 - 60;
+  btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+function noClicked() {
+  alert("NO is not an option babe 😌💖");
+  document.querySelector('.no').style.display = "none";
+}
+
+setInterval(() => {
+  const heart = document.createElement("div");
+  heart.className = "heart";
+  heart.innerHTML = "💖";
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+  document.body.appendChild(heart);
+  setTimeout(() => heart.remove(), 5000);
+}, 300);
+</script>
+
+</body>
+</html>
